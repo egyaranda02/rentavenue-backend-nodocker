@@ -195,7 +195,7 @@ module.exports.login = async function (req, res) {
                 message: "Email and password didn't match",
             });
         }
-        return res.status(404).json({
+        return res.status(200).json({
             success: false,
             message: "Email is not registered",
         });
