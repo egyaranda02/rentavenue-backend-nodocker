@@ -104,6 +104,7 @@ module.exports.register = async function (req, res) {
         const host = req.get("host");
         const link = "http://" + host + "/api/user/verify?token=" + token;
         mailOptions = {
+            from: process.env.EMAIL,
             to: email,
             subject: "Please confirm your Email account",
             html:
@@ -111,16 +112,9 @@ module.exports.register = async function (req, res) {
                 link +
                 ">Click here to verify</a>",
         };
-        await smtpTransport.sendMail(mailOptions, function (error, response) {
-            if (error) {
-                console.log(error);
-                return res.status(200).json({
-                    success: false,
-                    message: "Failed to send email"
-                });
-            } else {
-                console.log("Message sent");
-            }
+        smtpTransport.sendMail(mailOptions, (error, response) => {
+            error ? console.log(error) : console.log(response);
+            smtpTransport.close();
         });
         await db.Activation.create({
             id_user: user.id,
