@@ -111,7 +111,7 @@ module.exports.register = async function (req, res) {
                 link +
                 ">Click here to verify</a>",
         };
-        smtpTransport.sendMail(mailOptions, function (error, response) {
+        await smtpTransport.sendMail(mailOptions, function (error, response) {
             if (error) {
                 console.log(error);
                 return res.status(200).json({
