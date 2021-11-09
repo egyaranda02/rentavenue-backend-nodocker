@@ -218,5 +218,10 @@ module.exports.MidtransNotification = async function (req, res) {
                     message: "Payment pending"
                 })
             }
-        });
+        }).catch(error => {
+            return res.status(200).json({
+                success: false,
+                message: error.message
+            })
+        })
 }
