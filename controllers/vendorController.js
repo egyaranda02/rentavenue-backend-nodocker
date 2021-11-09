@@ -575,6 +575,26 @@ module.exports.vendorAnalytics = async function (req, res) {
             attributes: ['VenueId', [sequelize.fn('count', '*'), 'count']],
             group: ['VenueId']
         });
+        // const transMonth = await db.Transaction.findAll({
+        //     where: {
+        //         payment_status: 'finished'
+        //     },
+        //     attributes: [
+        //         [sequelize.fn('date_trunc', 'month', sequelize.col('Transaction.createdAt')), 'Date'],
+        //         [sequelize.fn('count', '*'), 'count']
+        //     ],
+        //     include: [
+        //         {
+        //             model: db.Venue,
+        //             attributes: ['VendorId'],
+        //             where: {
+        //                 VendorId: req.params.id
+        //             }
+        //         }
+        //     ],
+        //     group: ['Date'],
+        //     raw: true
+        // })
         let totalIncome = 0;
         transaction.forEach(async function (trans) {
             totalIncome += trans.total_payment;
