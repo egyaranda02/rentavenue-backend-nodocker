@@ -161,7 +161,7 @@ module.exports.MidtransNotification = async function (req, res) {
     });
     const nanoid = customAlphabet('1234567890abcdefghijklmnopqrstuvxyz', 8);
     const checkin_code = nanoid();
-    apiClient.transaction.notification(req)
+    apiClient.transaction.notification(req.body)
         .then(async (statusResponse) => {
             let orderId = statusResponse.order_id;
             let transactionStatus = statusResponse.transaction_status;
