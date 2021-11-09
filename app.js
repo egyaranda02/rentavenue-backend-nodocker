@@ -10,6 +10,8 @@ const app = express()
 
 const apiRoutes = require("./routes/index");
 
+const port = (process.env.PORT || 5000);
+
 const transactionExpiration = cron.schedule('* * * * *', async () => {
     console.log('Checking Transactions Expiration');
     const transactions = await db.Transaction.findAll({
