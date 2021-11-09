@@ -177,7 +177,8 @@ module.exports.MidtransNotification = async function (req, res) {
                     checkin_code: checkin_code
                 })
                 await transaction.update({
-                    payment_status: "capture",
+                    payment_status: "settlement",
+                    token: null,
                     expiredAt: null
                 })
                 return res.status(200).json({
@@ -191,6 +192,7 @@ module.exports.MidtransNotification = async function (req, res) {
                 })
                 await transaction.update({
                     payment_status: "settlement",
+                    token: null,
                     expiredAt: null
                 })
                 return res.status(200).json({
@@ -202,6 +204,7 @@ module.exports.MidtransNotification = async function (req, res) {
                 transactionStatus == 'expire') {
                 await transaction.update({
                     payment_status: "Failed",
+                    token: null,
                     expiredAt: null
                 })
                 return res.status(200).json({

@@ -88,7 +88,7 @@ const autoCheckout = cron.schedule('* * * * *', async () => {
 
 
 const corsOptions = {
-    origin: "http://localhost:3000",
+    origin: process.env.FE_URL,
     credentials: true, //access-control-allow-credentials:true
     optionSuccessStatus: 200,
 }
