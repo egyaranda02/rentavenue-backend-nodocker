@@ -136,8 +136,8 @@ module.exports.register = async function (req, res) {
         oauth2Client.setCredentials({
             refresh_token: process.env.REFRESH_TOKEN
         });
-        const accessToken = await oauth2Client.getAccessToken()
-        const smtpTransport = await nodemailer.createTransport({
+        const accessToken = oauth2Client.getAccessToken()
+        const smtpTransport = nodemailer.createTransport({
             service: "gmail",
             auth: {
                 type: "OAuth2",
@@ -160,7 +160,7 @@ module.exports.register = async function (req, res) {
                 link +
                 ">Click here to verify</a>",
         };
-        await smtpTransport.sendMail(mailOptions, (error, response) => {
+        smtpTransport.sendMail(mailOptions, (error, response) => {
             error ? console.log(error) : console.log(response);
             smtpTransport.close();
         });
