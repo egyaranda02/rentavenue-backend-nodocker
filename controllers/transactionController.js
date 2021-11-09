@@ -168,10 +168,9 @@ module.exports.MidtransNotification = async function (req, res) {
             let fraudStatus = statusResponse.fraud_status;
 
             const transaction = await db.Transaction.findByPk(orderId);
-
             console.log(`Transaction notification received. Order ID: ${orderId}. Transaction status: ${transactionStatus}. Fraud status: ${fraudStatus}`);
             // Sample transactionStatus handling logic
-            if (statusResponse.transaction_status == 'capture') {
+            if (transactionStatus == 'capture') {
                 await db.Checkin_Status.create({
                     TransactionId: TransactionId,
                     checkin_code: checkin_code
@@ -184,7 +183,7 @@ module.exports.MidtransNotification = async function (req, res) {
                     success: true,
                     message: "Payment received"
                 })
-            } else if (statusResponse.transaction_status == 'settlement') {
+            } else if (transactionStatus == 'settlement') {
                 await db.Checkin_Status.create({
                     TransactionId: TransactionId,
                     checkin_code: checkin_code
@@ -197,7 +196,7 @@ module.exports.MidtransNotification = async function (req, res) {
                     success: true,
                     message: "Payment received"
                 })
-            } else if (statusResponse.transaction_status == 'cancel' ||
+            } else if (transactionStatus == 'cancel' ||
                 transactionStatus == 'deny' ||
                 transactionStatus == 'expire') {
                 await transaction.update({
@@ -208,7 +207,7 @@ module.exports.MidtransNotification = async function (req, res) {
                     success: true,
                     message: "Transaction Failed"
                 })
-            } else if (statusResponse.transaction_status == 'pending') {
+            } else if (transactionStatus == 'pending') {
                 await transaction.update({
                     payment_status: "pending"
                 })
