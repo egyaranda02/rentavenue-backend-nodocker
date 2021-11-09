@@ -168,6 +168,7 @@ module.exports.MidtransNotification = async function (req, res) {
             let fraudStatus = statusResponse.fraud_status;
 
             const transaction = await db.Transaction.findByPk(orderId);
+            console.log(transaction);
             console.log(`Transaction notification received. Order ID: ${orderId}. Transaction status: ${transactionStatus}. Fraud status: ${fraudStatus}`);
             // Sample transactionStatus handling logic
             if (transactionStatus == 'capture') {
