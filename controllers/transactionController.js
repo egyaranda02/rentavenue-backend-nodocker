@@ -167,12 +167,11 @@ module.exports.MidtransNotification = async function (req, res) {
             let transactionStatus = statusResponse.transaction_status;
             let fraudStatus = statusResponse.fraud_status;
 
-            const transaction = db.Transaction.findByPk(orderId);
+            const transaction = await db.Transaction.findByPk(orderId);
 
             console.log(`Transaction notification received. Order ID: ${orderId}. Transaction status: ${transactionStatus}. Fraud status: ${fraudStatus}`);
-            console.log(statusResponse);
             // Sample transactionStatus handling logic
-            if (transactionStatus == 'capture') {
+            if (statusResponse.transaction_status == 'capture') {
                 await db.Checkin_Status.create({
                     TransactionId: TransactionId,
                     checkin_code: checkin_code
@@ -185,7 +184,7 @@ module.exports.MidtransNotification = async function (req, res) {
                     success: true,
                     message: "Payment received"
                 })
-            } else if (transactionStatus == 'settlement') {
+            } else if (statusResponse.transaction_status == 'settlement') {
                 await db.Checkin_Status.create({
                     TransactionId: TransactionId,
                     checkin_code: checkin_code
@@ -198,7 +197,7 @@ module.exports.MidtransNotification = async function (req, res) {
                     success: true,
                     message: "Payment received"
                 })
-            } else if (transactionStatus == 'cancel' ||
+            } else if (statusResponse.transaction_status == 'cancel' ||
                 transactionStatus == 'deny' ||
                 transactionStatus == 'expire') {
                 await transaction.update({
@@ -209,7 +208,7 @@ module.exports.MidtransNotification = async function (req, res) {
                     success: true,
                     message: "Transaction Failed"
                 })
-            } else if (transactionStatus == 'pending') {
+            } else if (statusResponse.transaction_status == 'pending') {
                 await transaction.update({
                     payment_status: "pending"
                 })
