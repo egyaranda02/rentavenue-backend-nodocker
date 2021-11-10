@@ -342,7 +342,8 @@ module.exports.EditVenue = async function (req, res) {
         const VenueId = venue.id;
         if (req.files['venue_photos']) {
             const PhotoCount = await db.Venue_Photo.findAndCountAll({ where: { VenueId: VenueId } })
-            let filename
+            let filename = ""
+            let url = ""
             if (PhotoCount.count > 5) {
                 return res.status(400).json({
                     success: false,
