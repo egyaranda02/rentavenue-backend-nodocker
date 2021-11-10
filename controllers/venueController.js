@@ -15,7 +15,7 @@ module.exports.getAll = async function (req, res) {
             where: { is_verified: true },
             include: [
                 {
-                    model: db.Venue.Photo,
+                    model: db.Venue_Photo,
                     attributes: ['id', 'url']
                 }
             ]
@@ -38,7 +38,7 @@ module.exports.getAllPriceDesc = async function (req, res) {
             where: { is_verified: true },
             include: [
                 {
-                    model: db.Venue.Photo,
+                    model: db.Venue_Photo,
                     attributes: ['id', 'url']
                 }
             ],
@@ -64,7 +64,7 @@ module.exports.getAllPriceAsc = async function (req, res) {
             where: { is_verified: true },
             include: [
                 {
-                    model: db.Venue.Photo,
+                    model: db.Venue_Photo,
                     attributes: ['id', 'url']
                 }
             ],
@@ -90,7 +90,7 @@ module.exports.getDetailVenue = async function (req, res) {
             where: { id: req.params.id },
             include: [
                 {
-                    model: db.Venue.Photo,
+                    model: db.Venue_Photo,
                     attributes: ['id', 'url']
                 }
             ]
@@ -154,7 +154,7 @@ module.exports.searchVenue = async function (req, res) {
             },
             include: [
                 {
-                    model: db.Venue.Photo,
+                    model: db.Venue_Photo,
                     attributes: ['id', 'url']
                 }
             ]
@@ -230,7 +230,7 @@ module.exports.getVenueByCityPost = async function (req, res) {
             },
             include: [
                 {
-                    model: db.Venue.Photo,
+                    model: db.Venue_Photo,
                     attributes: ['id', 'url']
                 }
             ]
@@ -256,7 +256,7 @@ module.exports.getVenueByCityGet = async function (req, res) {
             },
             include: [
                 {
-                    model: db.Venue.Photo,
+                    model: db.Venue_Photo,
                     attributes: ['id', 'url']
                 }
             ]
