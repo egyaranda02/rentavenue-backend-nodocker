@@ -150,16 +150,16 @@ module.exports.searchVenue = async function (req, res) {
                 {
                     model: db.Venue_Photo,
                     attributes: ['id', 'url']
+                },
+                {
+                    model: db.Transaction,
+                    attributes: [
+                        'start_book', 'finish_book'
+                    ]
                 }
-            ],
-            include: {
-                model: db.Transaction,
-                attributes: [
-                    'start_book', 'finish_book'
-                ]
-            }
+            ]
         })
-        console.log(findVenue);
+        console.log(findVenue)
         function filterDate(array) {
             for (let i = 0; i < array.length; i++) {
                 console.log("Function")
