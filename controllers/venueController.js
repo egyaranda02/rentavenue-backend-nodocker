@@ -190,7 +190,7 @@ module.exports.getCity = async function (req, res) {
     }
 }
 
-module.exports.getVenueByCity = async function (req, res) {
+module.exports.getVenueByCityPost = async function (req, res) {
     try {
         const {
             city
@@ -204,7 +204,27 @@ module.exports.getVenueByCity = async function (req, res) {
         const venue = await db.Venue.findAll({
             where: { city: { [Op.iLike]: city } },
             attributes: {
-                exclude: ['is_verified', 'status', 'updatedAt   ']
+                exclude: ['is_verified', 'status', 'updatedAt']
+            }
+        });
+        return res.status(200).json({
+            success: true,
+            data: venue
+        })
+    } catch (error) {
+        return res.status(400).json({
+            success: false,
+            message: error.message
+        })
+    }
+}
+
+module.exports.getVenueByCityGet = async function (req, res) {
+    try {
+        const venue = await db.Venue.findAll({
+            where: { city: { [Op.iLike]: req.params.city } },
+            attributes: {
+                exclude: ['is_verified', 'status', 'updatedAt']
             }
         });
         return res.status(200).json({
