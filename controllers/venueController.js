@@ -351,7 +351,7 @@ module.exports.EditVenue = async function (req, res) {
             }
             req.files['venue_photos'].forEach(async function (file) {
                 filename = file.filename;
-                url = req.file.path;
+                url = file.path;
                 try {
                     await db.Venue_Photo.create({
                         VenueId,
