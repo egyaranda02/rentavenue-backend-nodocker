@@ -312,12 +312,13 @@ module.exports.EditVenue = async function (req, res) {
         name,
         capacity,
         description,
+        address,
         price
     } = req.body
     try {
         const venue = await db.Venue.findByPk(req.params.id);
         const token = req.cookies.jwt;
-        const decoded = jwt.verify(token, process.env.SECRET_KEY);
+        const decoded = await jwt.verify(token, process.env.SECRET_KEY);
         if (decoded.VendorId != venue.VendorId) {
             return res.status(401).json({
                 success: false,
@@ -370,6 +371,7 @@ module.exports.EditVenue = async function (req, res) {
             name: name,
             capacity: capacity,
             description: description,
+            address: address,
             price: price
         });
         return res.status(200).json({
