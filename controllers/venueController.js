@@ -12,7 +12,13 @@ const { cloudinary } = require("../config/cloudinary.js");
 module.exports.getAll = async function (req, res) {
     try {
         const findVenue = await db.Venue.findAll({
-            where: { is_verified: true }
+            where: { is_verified: true },
+            include: [
+                {
+                    model: db.Venue.Photo,
+                    attributes: ['id', 'url']
+                }
+            ]
         });
         return res.status(200).json({
             success: true,
@@ -30,6 +36,12 @@ module.exports.getAllPriceDesc = async function (req, res) {
     try {
         const findVenue = await db.Venue.findAll({
             where: { is_verified: true },
+            include: [
+                {
+                    model: db.Venue.Photo,
+                    attributes: ['id', 'url']
+                }
+            ],
             order: [
                 ['price', 'DESC'],
             ]
@@ -50,6 +62,12 @@ module.exports.getAllPriceAsc = async function (req, res) {
     try {
         const findVenue = await db.Venue.findAll({
             where: { is_verified: true },
+            include: [
+                {
+                    model: db.Venue.Photo,
+                    attributes: ['id', 'url']
+                }
+            ],
             order: [
                 ['price', 'ASC'],
             ]
@@ -72,10 +90,8 @@ module.exports.getDetailVenue = async function (req, res) {
             where: { id: req.params.id },
             include: [
                 {
-                    model: db.Venue_Photo,
-                    attributes: {
-                        exclude: ['VenueId', 'createdAt', 'updatedAt']
-                    }
+                    model: db.Venue.Photo,
+                    attributes: ['id', 'url']
                 }
             ]
         })
@@ -135,7 +151,13 @@ module.exports.searchVenue = async function (req, res) {
                 attributes: [
                     'start_book', 'finish_book'
                 ]
-            }
+            },
+            include: [
+                {
+                    model: db.Venue.Photo,
+                    attributes: ['id', 'url']
+                }
+            ]
         })
         function filterDate(array) {
             for (let i = 0; i < array.length; i++) {
@@ -205,7 +227,13 @@ module.exports.getVenueByCityPost = async function (req, res) {
             where: { city: { [Op.iLike]: city } },
             attributes: {
                 exclude: ['is_verified', 'status', 'updatedAt']
-            }
+            },
+            include: [
+                {
+                    model: db.Venue.Photo,
+                    attributes: ['id', 'url']
+                }
+            ]
         });
         return res.status(200).json({
             success: true,
@@ -225,7 +253,13 @@ module.exports.getVenueByCityGet = async function (req, res) {
             where: { city: { [Op.iLike]: req.params.city } },
             attributes: {
                 exclude: ['is_verified', 'status', 'updatedAt']
-            }
+            },
+            include: [
+                {
+                    model: db.Venue.Photo,
+                    attributes: ['id', 'url']
+                }
+            ]
         });
         return res.status(200).json({
             success: true,
