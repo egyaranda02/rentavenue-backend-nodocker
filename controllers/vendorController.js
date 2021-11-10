@@ -470,6 +470,13 @@ module.exports.getVendorTransactionSuccess = async function (req, res) {
                     attributes: {
                         exclude: ['createdAt', 'updatedAt']
                     }
+                },
+                ,
+                {
+                    model: db.User,
+                    attributes: {
+                        exclude: ['password', 'is_verified', 'createdAt', 'updatedAt']
+                    }
                 }
             ]
         })
@@ -509,6 +516,12 @@ module.exports.getVendorTransactionFinished = async function (req, res) {
                     model: db.Venue,
                     attributes: {
                         exclude: ['createdAt', 'updatedAt']
+                    }
+                },
+                {
+                    model: db.User,
+                    attributes: {
+                        exclude: ['password', 'is_verified', 'createdAt', 'updatedAt']
                     }
                 }
             ]
