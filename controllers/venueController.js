@@ -146,23 +146,24 @@ module.exports.searchVenue = async function (req, res) {
                 ],
                 is_verified: true
             },
-            include: {
-                model: db.Transaction,
-                attributes: [
-                    'start_book', 'finish_book'
-                ]
-            },
             include: [
                 {
                     model: db.Venue_Photo,
                     attributes: ['id', 'url']
                 }
-            ]
+            ],
+            include: {
+                model: db.Transaction,
+                attributes: [
+                    'start_book', 'finish_book'
+                ]
+            }
         })
+        console.log(findVenue);
         function filterDate(array) {
             for (let i = 0; i < array.length; i++) {
                 console.log("Function")
-                array[i].Transactions.forEach((transaction) => {
+                array[i].Transactions.map(transaction => {
                     console.log(transaction.start_book);
                     if (moment(req.query.start_book).isBetween(transaction.start_book, transaction.finish_book) ||
                         moment(req.query.start_book).isSame(transaction.start_book) ||
