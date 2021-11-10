@@ -192,8 +192,20 @@ module.exports.getCity = async function (req, res) {
 
 module.exports.getVenueByCity = async function (req, res) {
     try {
+        const {
+            city
+        } = req.body
+        if (!city) {
+            return res.status(200).json({
+                success: false,
+                message: "Please insert the city"
+            })
+        }
         const venue = await db.Venue.findAll({
-            where: { city: req.params.city },
+            where: { city: city },
+            attributes: {
+                exclude: ['is_verified', 'status', 'updatedAt']
+            }
         });
         return res.status(200).json({
             success: true,
