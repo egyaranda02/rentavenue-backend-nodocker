@@ -162,7 +162,7 @@ module.exports.searchVenue = async function (req, res) {
         function filterDate(array) {
             for (let i = 0; i < array.length; i++) {
                 console.log("Function")
-                array[i].Transactions.map(transaction => {
+                array[i].Transactions.forEach((transaction) => {
                     console.log(transaction.start_book);
                     if (moment(req.query.start_book).isBetween(transaction.start_book, transaction.finish_book) ||
                         moment(req.query.start_book).isSame(transaction.start_book) ||
