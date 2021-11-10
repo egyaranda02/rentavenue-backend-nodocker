@@ -471,7 +471,6 @@ module.exports.getVendorTransactionSuccess = async function (req, res) {
                         exclude: ['createdAt', 'updatedAt']
                     }
                 },
-                ,
                 {
                     model: db.User,
                     attributes: {
