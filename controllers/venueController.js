@@ -202,9 +202,9 @@ module.exports.getVenueByCity = async function (req, res) {
             })
         }
         const venue = await db.Venue.findAll({
-            where: { city: city },
+            where: { city: { [Op.iLike]: city } },
             attributes: {
-                exclude: ['is_verified', 'status', 'updatedAt']
+                exclude: ['is_verified', 'status', 'updatedAt   ']
             }
         });
         return res.status(200).json({

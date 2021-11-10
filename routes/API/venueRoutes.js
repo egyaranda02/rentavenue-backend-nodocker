@@ -55,7 +55,7 @@ venueRouter.get('/', venueController.getAll);
 venueRouter.get('/price/desc', venueController.getAllPriceDesc);
 venueRouter.get('/price/asc', venueController.getAllPriceAsc);
 venueRouter.get('/city', venueController.getCity);
-venueRouter.post('/city/:city', venueController.getVenueByCity);
+venueRouter.post('/search/city', venueController.getVenueByCity);
 venueRouter.get('/search', venueController.searchVenue);
 venueRouter.post('/', authMiddleware.checkLogin, authMiddleware.checkVendor, upload.fields([{ name: 'venue_photos', maxCount: 5 }, { name: 'ktp', maxCount: 1 }, { name: 'surat_tanah', maxCount: 1 }]), venueController.Create);
 venueRouter.patch('/:id', authMiddleware.checkLogin, authMiddleware.checkVendor, upload.fields([{ name: 'venue_photos', maxCount: 5 }]), venueController.EditVenue);
