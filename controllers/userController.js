@@ -315,7 +315,7 @@ module.exports.getUserTransactionPending = async function (req, res) {
                     },
                     include: [
                         {
-                            model: db.Venue.Photo,
+                            model: db.Venue_Photo,
                             attributes: ['id', 'url']
                         }
                     ]
@@ -364,7 +364,7 @@ module.exports.getUserTransactionSuccess = async function (req, res) {
                     },
                     include: [
                         {
-                            model: db.Venue.Photo,
+                            model: db.Venue_Photo,
                             attributes: ['id', 'url']
                         }
                     ]
@@ -415,7 +415,7 @@ module.exports.getUserTransactionFinished = async function (req, res) {
                     },
                     include: [
                         {
-                            model: db.Venue.Photo,
+                            model: db.Venue_Photo,
                             attributes: ['id', 'url']
                         }
                     ]
