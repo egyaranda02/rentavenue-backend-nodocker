@@ -312,7 +312,13 @@ module.exports.getUserTransactionPending = async function (req, res) {
                     model: db.Venue,
                     attributes: {
                         exclude: ['createdAt', 'updatedAt']
-                    }
+                    },
+                    include: [
+                        {
+                            model: db.Venue.Photo,
+                            attributes: ['id', 'url']
+                        }
+                    ]
                 }
             ]
         })
@@ -355,7 +361,13 @@ module.exports.getUserTransactionSuccess = async function (req, res) {
                     model: db.Venue,
                     attributes: {
                         exclude: ['createdAt', 'updatedAt']
-                    }
+                    },
+                    include: [
+                        {
+                            model: db.Venue.Photo,
+                            attributes: ['id', 'url']
+                        }
+                    ]
                 }
             ]
         })
@@ -400,7 +412,13 @@ module.exports.getUserTransactionFinished = async function (req, res) {
                     model: db.Venue,
                     attributes: {
                         exclude: ['createdAt', 'updatedAt']
-                    }
+                    },
+                    include: [
+                        {
+                            model: db.Venue.Photo,
+                            attributes: ['id', 'url']
+                        }
+                    ]
                 }
             ]
         })

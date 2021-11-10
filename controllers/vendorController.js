@@ -427,7 +427,13 @@ module.exports.getVendorTransactionPending = async function (req, res) {
             }, include: [
                 {
                     model: db.Venue,
-                    where: { VendorId: req.params.id }
+                    where: { VendorId: req.params.id },
+                    include: [
+                        {
+                            model: db.Venue.Photo,
+                            attributes: ['id', 'url']
+                        }
+                    ]
                 }
             ]
         })
@@ -469,7 +475,13 @@ module.exports.getVendorTransactionSuccess = async function (req, res) {
                     model: db.Venue,
                     attributes: {
                         exclude: ['createdAt', 'updatedAt']
-                    }
+                    },
+                    include: [
+                        {
+                            model: db.Venue.Photo,
+                            attributes: ['id', 'url']
+                        }
+                    ]
                 },
                 {
                     model: db.User,
@@ -515,7 +527,13 @@ module.exports.getVendorTransactionFinished = async function (req, res) {
                     model: db.Venue,
                     attributes: {
                         exclude: ['createdAt', 'updatedAt']
-                    }
+                    },
+                    include: [
+                        {
+                            model: db.Venue.Photo,
+                            attributes: ['id', 'url']
+                        }
+                    ]
                 },
                 {
                     model: db.User,
