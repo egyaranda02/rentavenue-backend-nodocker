@@ -124,7 +124,7 @@ module.exports.getVenueDate = async function (req, res) {
             },
             attributes: ['start_book', 'finish_book']
         })
-        function getDates(startDate, finishDate) {
+        function getDates(startDate, finishDate, dateArray) {
             let dateArray = [];
             let currentDate = startDate;
             while (currentDate <= finishDate) {
@@ -135,7 +135,7 @@ module.exports.getVenueDate = async function (req, res) {
         }
         let dates = []
         findDate.forEach(async function (date) {
-            dates.push(getDates(date.start_book, date.finish_book))
+            getDates(date.start_book, date.finish_book, dates)
         })
         console.log(dates);
         return res.status(200).json({
