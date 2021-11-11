@@ -146,10 +146,7 @@ module.exports.verification = async function (req, res) {
                 UserId,
                 VendorId
             })
-            return res.status(200).json({
-                success: true,
-                message: "Email verification success",
-            });
+            res.redirect('https://rentvenue-163tgv31j-rentavenue.vercel.app/tenant/login');
         } else {
             return res.status(200).json({
                 success: false,
