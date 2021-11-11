@@ -128,7 +128,6 @@ module.exports.getVenueDate = async function (req, res) {
             let currentDate = moment(startDate);
             while (currentDate <= finishDate) {
                 dateArray.push(new Date(currentDate));
-                console.log(dateArray);
                 currentDate.add(1, 'days');
             }
             return dateArray;
@@ -137,10 +136,9 @@ module.exports.getVenueDate = async function (req, res) {
         findDate.forEach(async function (date) {
             getDates(date.start_book, date.finish_book, dates)
         })
-        console.log(dates);
         return res.status(200).json({
             success: true,
-            data: findDate
+            data: dates
         })
     } catch (error) {
         return res.status(400).json({
