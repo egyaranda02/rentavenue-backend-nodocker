@@ -133,7 +133,10 @@ module.exports.getVenueDate = async function (req, res) {
             }
             return dateArray;
         }
-        let dates = getDates(findDate.start_book, findDate.finish_book);
+        let dates = []
+        findDate.forEach(async function (date) {
+            dates.push(getDates(date.start_book, date.finish_book))
+        })
         console.log(dates);
         return res.status(200).json({
             success: true,
