@@ -72,7 +72,7 @@ module.exports = (sequelize, DataTypes) => {
     },
     url: {
       type: DataTypes.STRING,
-      defaultValue: "https://i.stack.imgur.com/34AD2.jpg"
+      defaultValue: "https://res.cloudinary.com/rentavenue/image/upload/v1636637899/assets/user/profile_picture/defaultphoto_vicsbb.jpg"
     }
   }, {
     hooks: {
