@@ -127,7 +127,8 @@ module.exports.getVenueDate = async function (req, res) {
         function getDates(startDate, finishDate, dateArray) {
             let currentDate = startDate;
             while (currentDate <= finishDate) {
-                dateArray.push(currentDate);
+                dateArray.push(new Date(currentDate));
+                console.log(dateArray);
                 moment(currentDate).add(1, 'days');
             }
             return dateArray;
