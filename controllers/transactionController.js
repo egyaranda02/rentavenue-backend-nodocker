@@ -20,7 +20,7 @@ module.exports.createTransaction = async function (req, res) {
     if (moment(start_book).isBefore(now)) {
         return res.status(200).json({
             success: false,
-            message: "Can't book days in the past"
+            message: "Can't book days in the past and Today"
         });
     }
     if (moment(finish_book).isBefore(start_book)) {
@@ -42,6 +42,12 @@ module.exports.createTransaction = async function (req, res) {
         const diffTime = Math.abs(date2 - date1);
         let diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
         diffDays += 1;
+        if (diffDays > 10) {
+            return res.status(200).json({
+                success: false,
+                message: "Maximum booking limit is 10 days"
+            })
+        }
         const token = req.cookies.jwt;
         const decoded = await jwt.verify(token, process.env.SECRET_KEY);
         const UserId = decoded.UserId;
