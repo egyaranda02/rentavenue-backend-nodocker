@@ -119,7 +119,7 @@ module.exports.getVenueDate = async function (req, res) {
             where: {
                 VenueId: req.params.id,
                 payment_status: {
-                    [Op.or]: ['settlement', 'capture', 'finished']
+                    [Op.or]: ['settlement', 'capture', 'finished', 'pending']
                 }
             },
             attributes: ['start_book', 'finish_book']
@@ -237,7 +237,7 @@ module.exports.getVenueByCityPost = async function (req, res) {
             })
         }
         const venue = await db.Venue.findAll({
-            where: { city: { [Op.iLike]: city } },
+            where: { city: { [Op.iLike]: city }, is_verified: true },
             attributes: {
                 exclude: ['is_verified', 'status', 'updatedAt']
             },
@@ -263,7 +263,7 @@ module.exports.getVenueByCityPost = async function (req, res) {
 module.exports.getVenueByCityGet = async function (req, res) {
     try {
         const venue = await db.Venue.findAll({
-            where: { city: { [Op.iLike]: req.params.city } },
+            where: { city: { [Op.iLike]: req.params.city }, is_verified: true },
             attributes: {
                 exclude: ['is_verified', 'status', 'updatedAt']
             },
