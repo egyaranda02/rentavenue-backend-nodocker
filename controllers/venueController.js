@@ -90,6 +90,10 @@ module.exports.getDetailVenue = async function (req, res) {
             where: { id: req.params.id },
             include: [
                 {
+                    model: db.Vendor,
+                    attributes: ['vendor_name', 'address', 'phone_number']
+                },
+                {
                     model: db.Venue_Photo,
                     attributes: ['id', 'url']
                 }
