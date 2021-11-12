@@ -146,7 +146,7 @@ module.exports.verification = async function (req, res) {
                 UserId,
                 VendorId
             })
-            res.redirect('https://rentvenue-163tgv31j-rentavenue.vercel.app/tenant/login');
+            res.redirect('https://rentvenue-pi.vercel.app/');
         } else {
             return res.status(200).json({
                 success: false,
