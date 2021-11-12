@@ -600,6 +600,12 @@ module.exports.vendorAnalytics = async function (req, res) {
                 payment_status: 'finished'
             },
             attributes: ['VenueId', [sequelize.fn('count', '*'), 'count']],
+            include: [
+                {
+                    model: db.Venue,
+                    attributes: ['name']
+                }
+            ],
             group: ['VenueId']
         });
         let totalIncome = 0;
