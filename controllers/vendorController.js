@@ -602,7 +602,7 @@ module.exports.vendorAnalytics = async function (req, res) {
             "Venue"."VendorId" AS "Venue.VendorId" 
             FROM "Transactions" AS "Transaction" INNER JOIN "Venues" AS "Venue" ON "Transaction"."VenueId" = "Venue"."id" AND "Venue"."VendorId" = ${req.params.id} 
             WHERE "Transaction"."payment_status" = 'finished' GROUP BY "month", "Venue"."VendorId" ;
-        `)
+        `, { type: QueryTypes.SELECT })
 
         const transactionPerVenue = await db.Transaction.findAll({
             where: {
