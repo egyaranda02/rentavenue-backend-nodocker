@@ -595,6 +595,15 @@ module.exports.vendorAnalytics = async function (req, res) {
                 }
             ]
         });
+
+        const transactionPerMonth = await sequelize.query(`
+            SELECT DATE_TRUNC('month', "start_book") AS "month", 
+            count('*') AS "count",
+            "Venue"."VendorId" AS "Venue.VendorId" 
+            FROM "Transactions" AS "Transaction" INNER JOIN "Venues" AS "Venue" ON "Transaction"."VenueId" = "Venue"."id" AND "Venue"."VendorId" = ${req.params.id} 
+            WHERE "Transaction"."payment_status" = 'finished' GROUP BY "month", "Venue"."VendorId" ;
+        `)
+
         const transactionPerVenue = await db.Transaction.findAll({
             where: {
                 payment_status: 'finished'
@@ -621,9 +630,9 @@ module.exports.vendorAnalytics = async function (req, res) {
                 totalFeedback: totalFeedback,
                 totalTransaction: totalTransaction,
                 totalIncome: totalIncome,
-                transactionPerVenue: transactionPerVenue
+                transactionPerVenue: transactionPerVenue,
+                transactionPerMonth: transactionPerMonth
             }
-
         })
     } catch (error) {
         return res.status(400).json({
