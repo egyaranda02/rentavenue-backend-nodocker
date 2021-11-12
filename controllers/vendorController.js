@@ -599,14 +599,14 @@ module.exports.vendorAnalytics = async function (req, res) {
             where: {
                 payment_status: 'finished'
             },
-            attributes: ['Transaction.VenueId', [sequelize.fn('count', '*'), 'count']],
+            attributes: [[sequelize.fn('count', '*'), 'count']],
             include: [
                 {
                     model: db.Venue,
                     attributes: ['name']
                 }
             ],
-            group: ['Transaction.VenueId']
+            group: ['Venue.id']
         });
         let totalIncome = 0;
         transaction.forEach(async function (trans) {
