@@ -470,6 +470,7 @@ module.exports.getVendorTransactionSuccess = async function (req, res) {
                 },
                 {
                     model: db.Venue,
+                    where: { VendorId: req.params.id },
                     attributes: {
                         exclude: ['createdAt', 'updatedAt']
                     },
@@ -516,6 +517,7 @@ module.exports.getVendorTransactionFinished = async function (req, res) {
                 },
                 {
                     model: db.Venue,
+                    where: { VendorId: req.params.id },
                     attributes: {
                         exclude: ['createdAt', 'updatedAt']
                     }
@@ -600,6 +602,7 @@ module.exports.vendorAnalytics = async function (req, res) {
             include: [
                 {
                     model: db.Venue,
+                    where: { VendorId: req.params.id },
                     attributes: ['name']
                 }
             ],
