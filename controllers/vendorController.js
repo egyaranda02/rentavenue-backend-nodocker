@@ -222,7 +222,7 @@ module.exports.login = async function (req, res) {
             }
             const passwordAuth = bcrypt.compareSync(req.body.password, vendor.password);
             if (passwordAuth) {
-                const token = await jwt.sign({ VendorId: vendor.id }, process.env.SECRET_KEY, { expiresIn: tokenAge });
+                const token = await jwt.sign({ VendorId: vendor.id }, process.env.SECRET_KEY, { expiresIn: '1h' });
                 res.cookie("jwt", token, { maxAge: 60 * 60 * 1000, httpOnly: true, secure: true, sameSite: 'none', })
                 return res.status(200).json({
                     success: true,
