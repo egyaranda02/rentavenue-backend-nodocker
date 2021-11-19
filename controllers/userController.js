@@ -316,6 +316,10 @@ module.exports.getUserTransactionPending = async function (req, res) {
                             attributes: ['id', 'url']
                         }
                     ]
+                },
+                {
+                    model: db.Vendor,
+                    attributes: ['phone_number']
                 }
             ]
         })
@@ -365,6 +369,10 @@ module.exports.getUserTransactionSuccess = async function (req, res) {
                             attributes: ['id', 'url']
                         }
                     ]
+                },
+                {
+                    model: db.Vendor,
+                    attributes: ['phone_number']
                 }
             ]
         })
@@ -416,6 +424,10 @@ module.exports.getUserTransactionFinished = async function (req, res) {
                             attributes: ['id', 'url']
                         }
                     ]
+                },
+                {
+                    model: db.Vendor,
+                    attributes: ['phone_number']
                 }
             ]
         })
