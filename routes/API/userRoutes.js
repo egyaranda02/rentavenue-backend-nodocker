@@ -43,6 +43,7 @@ userRouter.post('/register', userController.register);
 userRouter.get('/:id/transaction/pending', authMiddleware.checkLogin, userController.getUserTransactionPending);
 userRouter.get('/:id/transaction/success', authMiddleware.checkLogin, userController.getUserTransactionSuccess);
 userRouter.get('/:id/transaction/finish', authMiddleware.checkLogin, userController.getUserTransactionFinished);
+userRouter.get('/:id/transaction/:transactionId/code', authMiddleware.checkLogin, userController.getCheckinCode);
 userRouter.patch('/:id', authMiddleware.checkLogin, upload.single('profile_picture'), userController.editUser);
 userRouter.get('/verify', userController.verification);
 userRouter.get('/:id', authMiddleware.checkLogin, userController.getUserDetail);

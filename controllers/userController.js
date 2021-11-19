@@ -430,3 +430,32 @@ module.exports.getUserTransactionFinished = async function (req, res) {
         });
     }
 }
+
+module.exports.getCheckinCode = async function (req, res) {
+    const token = req.cookies.jwt;
+    const decoded = jwt.verify(token, process.env.SECRET_KEY);
+    if (decoded.UserId != req.params.id) {
+        return res.status(401).json({
+            success: false,
+            message: "You don't have authorization"
+        })
+    }
+    const Checkin_Status = await db.Checkin_Status.findOne({
+        where: {
+            TransactionId: req.params.transactionId
+        },
+        attributes: {
+            exclude: ['TransactionId', 'createdAt', 'updatedAt']
+        }
+    })
+    if (!Checkin_Status) {
+        return res.status(200).json({
+            success: false,
+            message: "Transaction not found"
+        })
+    }
+    return res.status(200).json({
+        success: true,
+        data: Checkin_Status
+    })
+}
