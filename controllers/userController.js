@@ -314,12 +314,12 @@ module.exports.getUserTransactionPending = async function (req, res) {
                         {
                             model: db.Venue_Photo,
                             attributes: ['id', 'url']
+                        },
+                        {
+                            model: db.Vendor,
+                            attributes: ['phone_number']
                         }
                     ]
-                },
-                {
-                    model: db.Vendor,
-                    attributes: ['phone_number']
                 }
             ]
         })
@@ -367,12 +367,12 @@ module.exports.getUserTransactionSuccess = async function (req, res) {
                         {
                             model: db.Venue_Photo,
                             attributes: ['id', 'url']
+                        },
+                        {
+                            model: db.Vendor,
+                            attributes: ['phone_number']
                         }
                     ]
-                },
-                {
-                    model: db.Vendor,
-                    attributes: ['phone_number']
                 }
             ]
         })
@@ -422,12 +422,12 @@ module.exports.getUserTransactionFinished = async function (req, res) {
                         {
                             model: db.Venue_Photo,
                             attributes: ['id', 'url']
+                        },
+                        {
+                            model: db.Vendor,
+                            attributes: ['phone_number']
                         }
                     ]
-                },
-                {
-                    model: db.Vendor,
-                    attributes: ['phone_number']
                 }
             ]
         })
