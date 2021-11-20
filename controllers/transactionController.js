@@ -178,6 +178,17 @@ module.exports.MidtransNotification = async function (req, res) {
             console.log(`Transaction notification received. Order ID: ${orderId}. Transaction status: ${transactionStatus}. Fraud status: ${fraudStatus}`);
             // Sample transactionStatus handling logic
             if (transactionStatus == 'capture') {
+                const checkDuplicate = await db.Checkin_Status.findOne({
+                    where: {
+                        TransactionId: TransactionId
+                    }
+                })
+                if (checkDuplicate) {
+                    return res.status(200).json({
+                        success: true,
+                        message: "Duplicated"
+                    })
+                }
                 await db.Checkin_Status.create({
                     TransactionId: TransactionId,
                     checkin_code: checkin_code
@@ -192,6 +203,17 @@ module.exports.MidtransNotification = async function (req, res) {
                     message: "Payment received"
                 })
             } else if (transactionStatus == 'settlement') {
+                const checkDuplicate = await db.Checkin_Status.findOne({
+                    where: {
+                        TransactionId: TransactionId
+                    }
+                })
+                if (checkDuplicate) {
+                    return res.status(200).json({
+                        success: true,
+                        message: "Duplicated"
+                    })
+                }
                 await db.Checkin_Status.create({
                     TransactionId: TransactionId,
                     checkin_code: checkin_code
