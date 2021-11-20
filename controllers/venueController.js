@@ -424,10 +424,10 @@ module.exports.EditVenue = async function (req, res) {
         }
         const VenueId = venue.id;
         if (req.files['venue_photos']) {
-            const PhotoCount = await db.Venue_Photo.findAndCountAll({ where: { VenueId: VenueId } })
+            const PhotoCount = await db.Venue_Photo.findAll({ where: { VenueId: VenueId } })
             let filename = ""
             let url = ""
-            if (PhotoCount.count >= 5) {
+            if (PhotoCount.length >= 5) {
                 req.files['venue_photos'].forEach(async function (file) {
                     filename = file.filename;
                     await cloudinary.uploader.destroy(filename, { resource_type: "image" }, function (error, result) {
