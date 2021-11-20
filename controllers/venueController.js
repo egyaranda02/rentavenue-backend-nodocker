@@ -428,7 +428,13 @@ module.exports.EditVenue = async function (req, res) {
             let filename = ""
             let url = ""
             if (PhotoCount.count >= 5) {
-                return res.status(400).json({
+                req.files['venue_photos'].forEach(async function (file) {
+                    filename = file.filename;
+                    await cloudinary.uploader.destroy(filename, { resource_type: "image" }, function (error, result) {
+                        console.log(result, error)
+                    });
+                })
+                return res.status(200).json({
                     success: false,
                     message: "Max photo reached (5)"
                 })
