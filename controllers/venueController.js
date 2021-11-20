@@ -423,7 +423,7 @@ module.exports.EditVenue = async function (req, res) {
             })
         }
         const VenueId = venue.id;
-        if (req.files['venue_photos']) {
+        if (req.files) {
             const PhotoCount = await db.Venue_Photo.findAndCountAll({ where: { VenueId: VenueId } })
             let filename = ""
             let url = ""
