@@ -329,7 +329,7 @@ module.exports.editVendor = async function (req, res) {
 
 module.exports.logout = (req, res) => {
     res.cookie("jwt", "", { maxAge: 1 });
-    res.status(201).json({
+    res.status(200).json({
         success: true,
         message: "Logout Success",
     });
