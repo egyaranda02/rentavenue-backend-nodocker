@@ -246,7 +246,7 @@ module.exports.editUser = async function (req, res) {
     let profile_picture = '';
     let url = '';
     if (req.file) {
-        if (findUser.profile_picture !== 'profile_pict.jpg') {
+        if (findUser.profile_picture !== 'profile_pict.jpg' && findUser.profile_picture.length !== 0) {
             console.log(findUser.profile_picture)
             await cloudinary.uploader.destroy(findUser.profile_picture, { resource_type: "image" }, function (error, result) {
                 console.log(result, error)
