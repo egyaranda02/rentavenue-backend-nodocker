@@ -245,15 +245,15 @@ module.exports.editUser = async function (req, res) {
     // See if user changing profile picture
     let profile_picture = '';
     let url = '';
-    if (req.file) {
+    if (req.files['profile_picture']) {
         if (findUser.profile_picture !== 'profile_pict.jpg' && findUser.profile_picture.length !== 0) {
             console.log(findUser.profile_picture)
             await cloudinary.uploader.destroy(findUser.profile_picture, { resource_type: "image" }, function (error, result) {
                 console.log(result, error)
             });
         }
-        profile_picture = req.file.filename;
-        url = req.file.path;
+        profile_picture = req.files['profile_picture'][0].filename;
+        url = req.files['profile_picture'][0].path;
     }
     try {
         await findUser.update({

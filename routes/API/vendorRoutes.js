@@ -45,7 +45,7 @@ vendorRouter.get('/:id/venue/notverified', authMiddleware.checkLogin, authMiddle
 vendorRouter.get('/:id/transaction/pending', authMiddleware.checkLogin, authMiddleware.checkVendor, vendorController.getVendorTransactionPending)
 vendorRouter.get('/:id/transaction/success', authMiddleware.checkLogin, authMiddleware.checkVendor, vendorController.getVendorTransactionSuccess)
 vendorRouter.get('/:id/transaction/finish', authMiddleware.checkLogin, authMiddleware.checkVendor, vendorController.getVendorTransactionFinished)
-vendorRouter.patch('/:id', authMiddleware.checkLogin, upload.single('profile_picture'), vendorController.editVendor);
+vendorRouter.patch('/:id', authMiddleware.checkLogin, upload.fields({ name: 'profile_picture', maxCount: 1 }), vendorController.editVendor);
 vendorRouter.get('/:id/analytic', vendorController.vendorAnalytics);
 vendorRouter.get('/verify', vendorController.verification);
 vendorRouter.get('/:id', vendorController.getVendorDetails);

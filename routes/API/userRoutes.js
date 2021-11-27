@@ -44,7 +44,7 @@ userRouter.get('/:id/transaction/pending', authMiddleware.checkLogin, userContro
 userRouter.get('/:id/transaction/success', authMiddleware.checkLogin, userController.getUserTransactionSuccess);
 userRouter.get('/:id/transaction/finish', authMiddleware.checkLogin, userController.getUserTransactionFinished);
 userRouter.get('/:id/transaction/:transactionId/code', authMiddleware.checkLogin, userController.getCheckinCode);
-userRouter.patch('/:id', authMiddleware.checkLogin, upload.single('profile_picture'), userController.editUser);
+userRouter.patch('/:id', authMiddleware.checkLogin, upload.fields({ name: 'profile_picture', maxCount: 1 }), userController.editUser);
 userRouter.get('/verify', userController.verification);
 userRouter.get('/:id', authMiddleware.checkLogin, userController.getUserDetail);
 userRouter.post('/login', userController.login);
