@@ -146,7 +146,7 @@ module.exports.verification = async function (req, res) {
                 UserId,
                 VendorId
             })
-            res.redirect('https://rentvenueid.vercel.app/');
+            res.redirect('https://rentvenue-kappa.vercel.app');
         } else {
             return res.status(200).json({
                 success: false,
