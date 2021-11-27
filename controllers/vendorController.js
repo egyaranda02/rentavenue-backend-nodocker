@@ -293,14 +293,16 @@ module.exports.editVendor = async function (req, res) {
     // See if user changing profile picture
     let profile_picture = '';
     let url = '';
-    if (req.files['profile_picture']) {
+    if (req.file) {
         if (findVendor.profile_picture != 'profile_pict.jpg' && findVendor.profile_picture.length !== 0) {
             await cloudinary.uploader.destroy(findVendor.profile_picture, { resource_type: "image" }, function (error, result) {
                 console.log(result, error)
             });
         }
-        profile_picture = req.files['profile_picture'][0].filename;
-        url = req.files['profile_picture'][0].path;
+
+        profile_picture = req.file.filename;
+        url = req.file.path
+
     }
     try {
         await findVendor.update({
