@@ -57,10 +57,11 @@ const autoCheckout = cron.schedule('* * * * *', async () => {
             }
         ]
     })
+    let total_payment = 0;
     checkin_status.forEach(async function (checkin) {
         const now = moment();
         if (moment(now).isAfter(checkin.Transaction.finish_book, 'day')) {
-            const total_payment = checkin.Transaction.total_payment;
+            total_payment = checkin.Transaction.total_payment;
             const wallet = await db.Wallet.findOne({ where: { VendorId: checkin.Transaction.Venue.VendorId } });
             await checkin.update({
                 checkin_code: null,
