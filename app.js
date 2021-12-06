@@ -57,8 +57,8 @@ const autoCheckout = cron.schedule('* * * * *', async () => {
             }
         ]
     })
-    let total_payment = 0;
-    let newBalance = 0;
+    // let total_payment = 0;
+    // let newBalance = 0;
     checkin_status.forEach(async function (checkin) {
         const now = moment();
         if (moment(now).isAfter(checkin.Transaction.finish_book, 'day')) {
@@ -79,7 +79,7 @@ const autoCheckout = cron.schedule('* * * * *', async () => {
                     balance: total_payment
                 })
             } else if (wallet) {
-                newBalance = wallet.balance + total_payment;
+                const newBalance = wallet.balance + checkin.Transaction.total_payment;
                 await wallet.update({
                     balance: newBalance
                 })
