@@ -80,6 +80,7 @@ const autoCheckout = cron.schedule('* * * * *', async () => {
                 })
             } else if (wallet) {
                 const newBalance = wallet.balance + checkin.Transaction.total_payment;
+                console.log(newBalance);
                 await wallet.update({
                     balance: newBalance
                 })
