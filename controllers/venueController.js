@@ -36,7 +36,6 @@ module.exports.getAllPriceDesc = async function (req, res) {
     try {
         const findVenue = await db.Venue.findAll({
             where: {
-                city: { [Op.iLike]: `%${req.params.city}%` },
                 is_verified: true
             },
             include: [
@@ -62,6 +61,63 @@ module.exports.getAllPriceDesc = async function (req, res) {
 }
 
 module.exports.getAllPriceAsc = async function (req, res) {
+    try {
+        const findVenue = await db.Venue.findAll({
+            where: {
+                is_verified: true
+            },
+            include: [
+                {
+                    model: db.Venue_Photo,
+                    attributes: ['id', 'url']
+                }
+            ],
+            order: [
+                ['price', 'ASC'],
+            ]
+        })
+        return res.status(200).json({
+            success: true,
+            data: findVenue
+        })
+    } catch (error) {
+        return res.status(400).json({
+            success: false,
+            message: error.message
+        })
+    }
+}
+
+module.exports.getAllPriceDescCity = async function (req, res) {
+    try {
+        const findVenue = await db.Venue.findAll({
+            where: {
+                city: { [Op.iLike]: `%${req.params.city}%` },
+                is_verified: true
+            },
+            include: [
+                {
+                    model: db.Venue_Photo,
+                    attributes: ['id', 'url']
+                }
+            ],
+            order: [
+                ['price', 'DESC'],
+            ]
+        })
+        return res.status(200).json({
+            success: true,
+            data: findVenue
+        })
+    } catch (error) {
+        return res.status(400).json({
+            success: false,
+            message: error.message
+        })
+    }
+}
+
+module.exports.getAllPriceAscCity = async function (req, res) {
     try {
         const findVenue = await db.Venue.findAll({
             where: {

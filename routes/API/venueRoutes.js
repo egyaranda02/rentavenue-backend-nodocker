@@ -52,8 +52,10 @@ const upload = multer({
 });
 
 venueRouter.get('/', venueController.getAll);
-venueRouter.get('/:city/price/desc', venueController.getAllPriceDesc);
-venueRouter.get('/:city/price/asc', venueController.getAllPriceAsc);
+venueRouter.get('/price/desc', venueController.getAllPriceDesc);
+venueRouter.get('/price/asc', venueController.getAllPriceAsc);
+venueRouter.get('/:city/price/desc', venueController.getAllPriceDescCity);
+venueRouter.get('/:city/price/asc', venueController.getAllPriceAscCity);
 venueRouter.get('/city', venueController.getCity);
 venueRouter.post('/search/city', venueController.getVenueByCityPost);
 venueRouter.get('/search/city/:city', venueController.getVenueByCityGet);
