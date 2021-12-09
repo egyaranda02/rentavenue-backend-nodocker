@@ -12,6 +12,8 @@ adminRouter.get('/venue/not_verified', authMiddleware.checkLogin, authMiddleware
 adminRouter.get('/venue/:id', authMiddleware.checkLogin, authMiddleware.checkAdmin, adminController.getDetailVenue);
 adminRouter.post('/venue/:id/verification', authMiddleware.checkLogin, authMiddleware.checkAdmin, adminController.venueVerification);
 adminRouter.get('/user', authMiddleware.checkLogin, authMiddleware.checkAdmin, adminController.getUser);
+adminRouter.get('/vendor', authMiddleware.checkLogin, authMiddleware.checkAdmin, adminController.getVendor);
+adminRouter.get('/transaction', authMiddleware.checkLogin, authMiddleware.checkAdmin, adminController.getTransaction);
 adminRouter.post('/logout', adminController.logout);
 
 module.exports = adminRouter;

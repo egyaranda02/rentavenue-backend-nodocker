@@ -108,7 +108,7 @@ module.exports.getTransaction = async function (req, res) {
         const transaction = await db.Transaction.findAll();
         return res.status(200).json({
             success: true,
-            data: findVenue
+            data: transaction
         })
     } catch (error) {
         return res.status(400).json({
@@ -203,6 +203,21 @@ module.exports.getUser = async function (req, res) {
         return res.status(200).json({
             success: true,
             data: findUser
+        })
+    } catch (error) {
+        return res.status(200).json({
+            success: false,
+            message: error.message
+        })
+    }
+}
+
+module.exports.getVendor = async function (req, res) {
+    try {
+        const findVendor = await db.Vendor.findAll();
+        return res.status(200).json({
+            success: true,
+            data: findVendor
         })
     } catch (error) {
         return res.status(200).json({
