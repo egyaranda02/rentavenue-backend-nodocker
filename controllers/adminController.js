@@ -106,7 +106,6 @@ module.exports.getDocumentVenue = async function (req, res) {
                 message: "Document not found"
             })
         }
-        console.log()
         return res.status(200).json({
             success: true,
             urlKTP: findKTP.url,
