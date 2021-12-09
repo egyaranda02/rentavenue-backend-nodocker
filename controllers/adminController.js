@@ -199,7 +199,11 @@ module.exports.blockVenue = async function (req, res) {
 
 module.exports.getUser = async function (req, res) {
     try {
-        const findUser = await db.User.findAll();
+        const findUser = await db.User.findAll({
+            attributes: {
+                exclude: ['password']
+            }
+        });
         return res.status(200).json({
             success: true,
             data: findUser
@@ -214,7 +218,11 @@ module.exports.getUser = async function (req, res) {
 
 module.exports.getVendor = async function (req, res) {
     try {
-        const findVendor = await db.Vendor.findAll();
+        const findVendor = await db.Vendor.findAll({
+            attributes: {
+                exclude: ['password']
+            }
+        });
         return res.status(200).json({
             success: true,
             data: findVendor
