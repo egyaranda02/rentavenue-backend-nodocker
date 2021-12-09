@@ -76,17 +76,42 @@ module.exports.getVenue = async function (req, res) {
 
 module.exports.getDocumentVenue = async function (req, res) {
     try {
-        const findDocument = await db.Document.findAll({
+        if (!req.params.id) {
+            return res.status(200).json({
+                success: false,
+                message: "Please enter Id"
+            })
+        }
+        const findKTP = await db.Document.findAll({
             where: {
+                type: "ktp",
                 VenueId: req.params.id
             },
             attributes: {
                 exclude: ['createdAt', 'updatedAt', 'filename']
             }
         });
+        const findSurat = await db.Document.findAll({
+            where: {
+                type: "surat_tanah",
+                VenueId: req.params.id
+            },
+            attributes: {
+                exclude: ['createdAt', 'updatedAt', 'filename']
+            }
+        });
+        if (!findKTP || !findSurat) {
+            return res.status(200).json({
+                success: false,
+                message: "Document not found"
+            })
+        }
         return res.status(200).json({
             success: true,
-            data: findDocument
+            data: {
+                urlKTP: findKTP,
+                urlSurat: findSurat
+            }
         })
     } catch (error) {
         return res.status(400).json({
