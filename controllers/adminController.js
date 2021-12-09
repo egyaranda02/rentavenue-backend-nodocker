@@ -82,23 +82,25 @@ module.exports.getDocumentVenue = async function (req, res) {
                 message: "Please enter Id"
             })
         }
-        const findKTP = await db.Document.findAll({
+        const findKTP = await db.Document.findOne({
             where: {
                 type: "ktp",
                 VenueId: req.params.id
             },
             attributes: {
                 exclude: ['createdAt', 'updatedAt', 'filename']
-            }
+            },
+            raw: true
         });
-        const findSurat = await db.Document.findAll({
+        const findSurat = await db.Document.findOne({
             where: {
                 type: "surat_tanah",
                 VenueId: req.params.id
             },
             attributes: {
                 exclude: ['createdAt', 'updatedAt', 'filename']
-            }
+            },
+            raw: true
         });
         if (!findKTP || !findSurat) {
             return res.status(200).json({
@@ -108,8 +110,10 @@ module.exports.getDocumentVenue = async function (req, res) {
         }
         return res.status(200).json({
             success: true,
-            urlKTP: findKTP.url,
-            urlSurat: findSurat.url
+            data: {
+                urlKTP: findKTP.url,
+                urlSurat: findSurat.url
+            }
         })
     } catch (error) {
         return res.status(400).json({
