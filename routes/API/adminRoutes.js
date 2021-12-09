@@ -7,11 +7,11 @@ const authMiddleware = require('../../middleware/authMiddleware');
 const adminController = require('../../controllers/adminController');
 
 adminRouter.post('/login', adminController.login);
-adminRouter.get('/venue', adminController.getVenue);
-adminRouter.get('/venue/not_verified', adminController.getVenueNotVerified);
-adminRouter.get('/venue/:id', adminController.getDetailVenue);
-adminRouter.post('/venue/:id/verification', adminController.venueVerification);
-adminRouter.get('/user', adminController.getUser);
+adminRouter.get('/venue', authMiddleware.checkAdmin, adminController.getVenue);
+adminRouter.get('/venue/not_verified', authMiddleware.checkAdmin, adminController.getVenueNotVerified);
+adminRouter.get('/venue/:id', authMiddleware.checkAdmin, adminController.getDetailVenue);
+adminRouter.post('/venue/:id/verification', authMiddleware.checkAdmin, adminController.venueVerification);
+adminRouter.get('/user', authMiddleware.checkAdmin, adminController.getUser);
 adminRouter.post('/logout', adminController.logout);
 
 module.exports = adminRouter;
