@@ -106,14 +106,11 @@ module.exports.getDocumentVenue = async function (req, res) {
                 message: "Document not found"
             })
         }
-        const urlKTP = findKTP.url;
-        const urlSurat = findSurat.url;
+        console.log()
         return res.status(200).json({
             success: true,
-            data: {
-                urlKTP: urlKTP,
-                urlSurat: urlSurat
-            }
+            urlKTP: findKTP.url,
+            urlSurat: findSurat.url
         })
     } catch (error) {
         return res.status(400).json({
