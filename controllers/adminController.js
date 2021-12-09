@@ -45,7 +45,23 @@ module.exports.login = async function (req, res) {
 
 module.exports.getVenue = async function (req, res) {
     try {
-        const findVenue = await db.Venue.findAll();
+        const findVenue = await db.Venue.findAll({
+            where: {
+                status: {
+                    [Op.not]: ["reject"]
+                }
+            },
+            include: [
+                {
+                    model: db.Vendor,
+                    attributes: ['vendor_name', 'address', 'phone_number']
+                },
+            ],
+            order: [
+                ['is_verified', 'ASC'],
+                ['id', 'ASC']
+            ]
+        });
         return res.status(200).json({
             success: true,
             data: findVenue
