@@ -48,7 +48,7 @@ module.exports.getVenue = async function (req, res) {
         const findVenue = await db.Venue.findAll({
             where: {
                 status: {
-                    [Op.not]: ["reject"]
+                    [Op.not]: ["rejected"]
                 }
             },
             include: [
