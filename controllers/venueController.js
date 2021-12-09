@@ -61,7 +61,10 @@ module.exports.getAllPriceDesc = async function (req, res) {
 module.exports.getAllPriceAsc = async function (req, res) {
     try {
         const findVenue = await db.Venue.findAll({
-            where: { is_verified: true },
+            where: {
+                city: { [Op.iLike]: `%${req.query.city}%` },
+                is_verified: true
+            },
             include: [
                 {
                     model: db.Venue_Photo,
@@ -211,7 +214,10 @@ module.exports.searchVenue = async function (req, res) {
 module.exports.getCity = async function (req, res) {
     try {
         const venue = await db.Venue.findAll({
-            where: { is_verified: true },
+            where: {
+                city: { [Op.iLike]: `%${req.query.city}%` },
+                is_verified: true
+            },
             attributes: ['city', 'Venue.city', [sequelize.fn('count', sequelize.col('Venue.id')), 'venueCount']],
             group: ['Venue.city'],
             order: [[sequelize.col('venueCount'), 'DESC']]
