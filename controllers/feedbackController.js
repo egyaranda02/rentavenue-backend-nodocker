@@ -108,7 +108,7 @@ module.exports.getFeedbackVenue = async function (req, res) {
                     include: [
                         {
                             model: db.User,
-                            attributes: ['firstName', 'lastName', 'profile_picture']
+                            attributes: ['firstName', 'lastName', 'profile_picture', 'url']
                         }
                     ]
                 }
