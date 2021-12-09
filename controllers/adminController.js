@@ -58,6 +58,28 @@ module.exports.getVenue = async function (req, res) {
     }
 }
 
+module.exports.getDocumentVenue = async function (req, res) {
+    try {
+        const findDocument = await db.Document.findAll({
+            where: {
+                VenueId: req.params.id
+            },
+            attributes: {
+                exclude: ['createdAt', 'updatedAt', 'filename']
+            }
+        });
+        return res.status(200).json({
+            success: true,
+            data: findDocument
+        })
+    } catch (error) {
+        return res.status(400).json({
+            success: false,
+            message: error.message
+        })
+    }
+}
+
 module.exports.getVenueNotVerified = async function (req, res) {
     try {
         const findVenue = await db.Venue.findAll({ where: { is_verified: false } });
