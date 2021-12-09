@@ -36,7 +36,7 @@ module.exports.getAllPriceDesc = async function (req, res) {
     try {
         const findVenue = await db.Venue.findAll({
             where: {
-                city: { [Op.iLike]: `%${req.query.city}%` },
+                city: { [Op.iLike]: `%${req.params.city}%` },
                 is_verified: true
             },
             include: [
@@ -65,7 +65,7 @@ module.exports.getAllPriceAsc = async function (req, res) {
     try {
         const findVenue = await db.Venue.findAll({
             where: {
-                city: { [Op.iLike]: `%${req.query.city}%` },
+                city: { [Op.iLike]: `%${req.params.city}%` },
                 is_verified: true
             },
             include: [
