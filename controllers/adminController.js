@@ -109,8 +109,8 @@ module.exports.getDocumentVenue = async function (req, res) {
         return res.status(200).json({
             success: true,
             data: {
-                urlKTP: findKTP,
-                urlSurat: findSurat
+                urlKTP: findKTP.url,
+                urlSurat: findSurat.url
             }
         })
     } catch (error) {
