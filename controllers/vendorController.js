@@ -82,7 +82,7 @@ module.exports.getVendorDetails = async function (req, res) {
             ]
         })
         if (!vendor) {
-            return res.status(404).json({
+            return res.status(200).json({
                 success: false,
                 message: "Vendor not found",
             });
@@ -175,7 +175,7 @@ module.exports.register = async function (req, res) {
         });
     } catch (error) {
         console.log(error);
-        return res.status(400).json({
+        return res.status(200).json({
             success: false,
             message: error.message
         })
@@ -196,7 +196,7 @@ module.exports.verification = async function (req, res) {
                 VendorId,
                 UserId
             })
-            res.redirect('https://rentvenue-kappa.vercel.app/vendor/login');
+            res.redirect('https://rentvenueid-tau.vercel.app/vendor/login');
         }
         return res.status(200).json({
             success: false,
@@ -264,7 +264,7 @@ module.exports.editVendor = async function (req, res) {
     const findVendor = await db.Vendor.findByPk(req.params.id);
     const token = req.cookies.jwt;
     if (!findVendor) {
-        return res.status(404).json({
+        return res.status(200).json({
             success: false,
             message: "Vendor not found!",
         });

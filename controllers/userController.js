@@ -125,7 +125,7 @@ module.exports.register = async function (req, res) {
             data: user
         });
     } catch (error) {
-        return res.status(400).json({
+        return res.status(200).json({
             success: false,
             message: error.message
         })
@@ -146,7 +146,7 @@ module.exports.verification = async function (req, res) {
                 UserId,
                 VendorId
             })
-            res.redirect('https://rentvenue-kappa.vercel.app');
+            res.redirect('https://rentvenueid-tau.vercel.app');
         } else {
             return res.status(200).json({
                 success: false,
@@ -197,7 +197,7 @@ module.exports.login = async function (req, res) {
             message: "Email is not registered",
         });
     } catch (error) {
-        return res.status(400).json({
+        return res.status(200).json({
             success: false,
             message: error.message
         });
